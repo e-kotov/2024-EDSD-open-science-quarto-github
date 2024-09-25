@@ -113,7 +113,7 @@ packages <- c(
   "spData", # to easily get world boundaires
   "countrycode", # to convert between iso2 and iso3 country codes
   "flowmapblue", # for interactive flow mapping
-  "flowmapper", # for static flow mapping using ggplot2
+  "flowmapper" # for static flow mapping using ggplot2
   )
 install.packages(packages)
 ```
