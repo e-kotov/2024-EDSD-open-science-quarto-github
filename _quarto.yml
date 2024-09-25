@@ -32,6 +32,9 @@ website:
       - href: questions.qmd
         text: "0b. Questions during the workshop"
       - task-01.qmd
+      - href: "https://rstudio-conf-2022.github.io/get-started-quarto/"
+        target: "_blank"
+        text: "...learn more in advanced Quarto workshop by Posit"
 
 
 
