@@ -1,0 +1,269 @@
+---
+title: "1. Workshop Task"
+---
+
+Your task is to create a reproducible summary report with key statistics and a flowmap using the [Scholarly Migration Database](https://www.scholarlymigration.org/){target="_blank"}. This is a beginner level task. 
+
+If you are feeling especially confident, you can use the data from the [The Human Migration Database](https://github.com/MaciejDanko/HMigD_Shiny_App_I), which you can download via the interactive [web app](https://maciej-jan-danko.shinyapps.io/HMigD_Shiny_App_I/) (see last the tab for downloads). Warning: this is likely take more time than with the Scholarly Migration Database, as there are more data columns and you will spend more time reading the codebook. So only go for this task if the R programming part and Quarto are easy for your.
+
+# Final goal
+
+The final goal is to have a repository on GitHub with:
+  
+  - a reproducible Quarto (`*.qmd`) document in the root of the repository
+  
+  - an `html` file created from the `*.qmd` file above in the `docs` folder of the repository
+  
+  - a `README.md` file in the root of the repository that briefly describes the project (e.g. specifies that this is an assignment done as part of EDSD linking back to EDSD website, or to this workshop materials, etc. )
+
+Requirements:
+
+  - The Quarto document can be rendered without errors into an `html` file
+
+  - The document contains R code to load the data and perform any neccessary data transformation for visualisation. Instead of commenting the code, use plain or markdown-formatted text outside the code blocks.
+
+  - The document contains at least two figures summarizing the flows data (e.g. a histogram, a scatter plot, etc.)
+
+  - The document contains a flowmap
+
+  - The document layout uses some of the custom figure placement options from [Article Layout](https://quarto.org/docs/authoring/article-layout.html){target="_blank"}.
+
+
+# Step by step instructions
+
+Make sure you went through the [setup steps](00-setup.qmd), and therefore have all the tools and a GitHub account.
+
+## 1. Cloning the repository
+
+### 1.1. Clone using your GitHub account
+
+1. Go to the repository of the [Scholarly Migration Database](https://github.com/MPIDR/Global-flows-and-rates-of-international-migration-of-scholars/){target="_blank"} and "Fork" it into your GitHub account.
+
+![](media/images/fork-smd.png)
+
+2. Open `RStudio` and create a new project.
+
+    2.1. Choose "Version Control":
+
+    ![](media/images/git-clone-rstudio-001.png)
+
+    2.2. Choose "Git" as your version control system:
+
+    ![](media/images/git-clone-rstudio-002.png)
+
+    2.3. Copy the link to your repository from the web and paste it in the prompt:
+
+    ![](media/images/git-clone-rstudio-003.png)
+
+    2.4. If this is your first time using git and GitHub on this computer, you should get a prompt like this:
+
+    ![](media/images/git-clone-rstudio-004.png)
+
+    You should choose the blue button **"Sign in with your browser"**.
+
+    2.5. Complete the authentication in the web browser with your GitHub account:
+
+    ![](media/images/git-clone-rstudio-005.png)
+
+
+You only need to do this once, as this sets up your local `git` installation to use your GitHub acccount. So when you work with another online repository, you should just be able to access it without those extra steps.
+
+### 1.2. Fallback if everything else fails, just download the repository
+
+If nothing works for you, feel free to just download the [Scholarly Migration Database](https://github.com/MPIDR/Global-flows-and-rates-of-international-migration-of-scholars/){target="_blank"} repository manually.
+
+![](media/images/download-repo.png)
+
+## 2. Explore the data
+
+1. Create a new Quarto document in the root folder of the cloned or downloaded repository:
+
+Either in the top left of RStudio:
+
+![](media/images/new-quarto-doc.png)
+
+Or in the bottom right in the Files pane:
+
+![](media/images/new-quarto-doc-file-pane.png)
+
+2. Using the basic R and Quarto syntax (see [intro reference of basic Quarto syntax here](https://quarto.org/docs/get-started/computations/rstudio.html){target="_blank"}), list the packages you need to be loaded in the first chunk/block of code.
+
+3. Use the more chunks/blocks of code to load the data (you may use either **openalex_2024_V1_scholarlymigration_countryflows_enriched.csv** or **scopus_2024_V1_scholarlymigration_countryflows_enriched.csv**) and explore it. You may ignore the code visibility options for now. Just leave default options for code blocks by not addint any options at this point. Use `dplyr` for data manipulation and `ggplot2` for data visualization.
+
+## 3. Spatial aspect of the migration data
+
+Apart from the histograms, scatterplots or other plots, it is also useful to look at your data on a map like so:
+
+
+```{r}
+shiny::tags$iframe(src = "media/interactive/flowmap_widget.html", width = "100%", height = "600px")
+```
+
+
+The data in the Scholarly Migration Database does not contain coordinates, but has country names and their [ISO codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes){target="_blank"}. So you can combine this data with some other datasource that coordinates or boundaries for countries and their ISO codes.
+
+### 3.1 Packages for spatial data and flow mapping
+
+Here is a list of packages that you need to map the migration data:
+
+```{r}
+#| eval: false
+packages <- c(
+  "sf", # for working with spatial data
+  "spData", # to easily get world boundaires
+  "countrycode", # to convert between iso2 and iso3 country codes
+  "flowmapblue", # for interactive flow mapping
+  "flowmapper", # for static flow mapping using ggplot2
+  )
+install.packages(packages)
+```
+
+```{r}
+#| warning: false
+library(sf)
+library(spData)
+library(countrycode)
+library(flowmapblue)
+library(flowmapper)
+
+library(tidyverse)
+```
+
+
+
+### 3.2. How to prepare the data for flow mapping
+
+For mapping the flows you will need the coorindates of the countries.
+
+An easy way to create these coordinates is by getting the data on country boundaries from the [`{spData}`](https://jakubnowosad.com/spData/){target="_blank"} package:
+
+```{r}
+countries <- spData::world
+glimpse(countries)
+```
+
+
+So this spatial data is just like a regular `data.frame`/`tibble`, but with an extra column with geometry data. Therefore, you can plot this data using `ggplot2`:
+
+```{r}
+countries |> 
+  ggplot() +
+  geom_sf()
+```
+
+
+You can also include several layers in the same plot:
+
+```{r}
+#| warning: false
+ggplot() +
+  geom_sf(data = countries) +
+  geom_sf(data = st_centroid(countries), color = "darkred")
+```
+
+For flow mapping, you only one point per country, so you only need a center (or more formally a 'centroid') of each country's polygon. Here is how you can do it:
+
+
+```{r}
+#| warning: false
+
+countries_centroids <- countries |> 
+  st_centroid() |> # finds a center of each country'spolygon
+  st_coordinates() |>  # extracts numeric coorindates from the POINT geometry
+  as.data.frame() |> # converts the matrix to a data.frame 
+  setNames(c("lon", "lat")) |> # renames the columns
+  cbind(countries) |> # adds back all the columns (except for geometry) form `countries`
+  select(iso_a2, lon, lat, name_long) # only selects a few columns that we really need
+
+glimpse(countries_centroids)
+```
+
+You may freely reuse this code above in your Quarto report.
+
+The data format you get is ideal for both [`{flowmapblue}`](https://flowmapblue.github.io/flowmapblue.R/){target="_blank"} and [`{flowmapper}`](https://github.com/JohMast/flowmapper) packages. You only need to tweak the column names of the `countries_centroids` `data.frame` before using it with either of these packages. You can see relevant package documentation for more details. Alternatively, you can follow tutorials for [`{flowmapper}`](https://ropenspain.github.io/spanishoddata/articles/flowmaps-static.html#reshape-flows-for-visualization){target="_blank"} and [`{flowmapblue}`](https://ropenspain.github.io/spanishoddata/articles/flowmaps-interactive.html#prepare-data-for-visualization){target="_blank"}.
+
+### 3.3. Country codes
+
+You will find that the country code data in the Scholarly Migration Database does not match with the country names in the `countries` `data.frame`. Scholarly migration database uses ISO 3166-1 alpha-3 codes, and `countrycode` uses the ISO 3166-1 alpha-2 codes. So you need to convert the country names in the `countries` `data.frame` to ISO 3166-1 alpha-3 codes.
+
+You can do this conversion using the `countrycode` package like so:
+
+```{r}
+#| eval: false
+library(countrycode)
+
+# assuming your data.frame is called `scopus_country_flows`
+scopus_country_flows <- scopus_country_flows |> 
+  mutate(
+    iso2codefrom = countrycode(iso3codefrom,
+      origin = "iso3c",
+      destination = "iso2c"),
+    iso2codeto = countrycode(iso3codeto,
+      origin = "iso3c",
+      destination = "iso2c")
+  )
+```
+
+
+
+### 3.4. Hints on plotting the flows
+
+#### `{flowmapper}`
+
+To plot the flows statically with `{flowmapper}`, you only need a regular code chunk, same as you would have for a `ggplot2` plot.
+
+Feel free to adapt [this tutorial](https://ropenspain.github.io/spanishoddata/articles/flowmaps-static.html){target="_blank"}, but use the Scholarly Migration Database data instead of the mobility data used there.
+
+#### `{flowmapblue}`
+
+To create interactive flow maps with the `{flowmapblue}`, you will need a free MapBox account. Feel free to adapt [this tutorial](https://ropenspain.github.io/spanishoddata/articles/flowmaps-interactive.html){target="_blank"}, but use the Scholarly Migration Database data instead of the mobility data used there.
+
+To include the interactive plot with `{flowmapblue}`, you may need a somewhat more sophisticated code chunk. See the instructions below.
+
+If you created an interactive flowmap like so:
+
+```{r}
+#| eval: false
+flowmap <- flowmapblue(locations = locations, flows = flows, mapboxAccessToken = mapbox_access_token)
+```
+
+But simply printing the `flowmap` object in a code block breaks your entire Quarto document, here is what you need to do.
+
+Save the `flowmap` to an `html` file:
+
+```{r}
+#| eval: false
+htmlwidgets::saveWidget(flowmap, "flowmap.html")
+```
+
+Then include the `html` file in your Quarto document like so:
+
+
+```{r}
+#| eval: false
+library(shiny)
+shiny::tags$iframe(src = "flowmap_widget.html", width = "100%", height = "600px")
+```
+
+## 4. Create your final document
+
+Once you have figured out which summary plots and which flow map you would like to include in your final document, create a copy of your draft document that you were working with and clean it up. Only keep the code that you absolutely need for the document to be rendered without errors. Name this copy `index.qmd`.
+
+Adjust the code visibility in your final document to your liking, using the Quarto documentation on [HTML blokcs](https://quarto.org/docs/output-formats/html-code.html){target="_blank"} and [code execution](https://quarto.org/docs/computations/execution-options.html){target="_blank"}.
+
+Create a file named `_quarto.yaml` in the root of the repository and add the following to it:
+
+```{yaml}
+#| eval: false
+project:
+  output-dir: docs
+```
+
+Make sure you respect the indentation (i.e. number of tabs/spaces before `output-dir`) of the YAML file.
+
+Then render your final Quarto document into an `html` file, it should end up in the `docs` folder with the name `index.html`.
+
+## 5. Submit
+
+Post the link to your repository in issues of this repository:
+[https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues](https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues){target="_blank"}
