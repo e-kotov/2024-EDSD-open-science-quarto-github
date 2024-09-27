@@ -6,7 +6,7 @@ project:
 lang: en
 website:
   title: "Open Science and Reproducibility with Quarto, GitHub, and R"
-  site-url: https://e-kotov.github.io/2024-EDSD-open-science-quarto-github/
+  site-url: https://www.ekotov.pro/2024-EDSD-open-science-quarto-github/
   repo-url: https://github.com/e-kotov/2024-EDSD-open-science-quarto-github
   page-navigation: true
   page-footer: 
@@ -32,9 +32,14 @@ website:
       - href: questions.qmd
         text: "0b. Questions during the workshop"
       - task-01.qmd
-      - href: "https://rstudio-conf-2022.github.io/get-started-quarto/"
-        target: "_blank"
-        text: "...learn more in advanced Quarto workshop by Posit"
+      - section: "Learn more"
+        contents:
+          - href: "https://rstudio-conf-2022.github.io/get-started-quarto/"
+            target: "_blank"
+            text: "...learn more about Quarto in advanced Quarto workshop by Posit"
+          - href: "https://www.ekotov.pro/2024-mpidr-summer-incubator-containers/"
+            target: "_blank"
+            text: "...learn more about launching your repository  in a web browser version of RStudio in 'Containers for Computational Reproducibility' workshop"
 
 
 
@@ -45,6 +50,8 @@ format:
     theme:
       light: zephyr
       dark: slate
+    link-external-icon: true
+    link-external-newwindow: true
     css: styles.css
     toc: true
     toc-depth: 4

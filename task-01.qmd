@@ -59,6 +59,8 @@ Make sure you went through the [setup steps](00-setup.qmd), and therefore have a
 
     ![](media/images/git-clone-rstudio-004.png)
 
+    *You may not get this prompt if the repository you are downloading is public (which in this case when you have created a fork, it is). You will get this prompt when you try to push (upload) any changes you make in the repository back to GitHub.*
+    
     You should choose the blue button **"Sign in with your browser"**.
 
     2.5. Complete the authentication in the web browser with your GitHub account:
@@ -88,7 +90,7 @@ Or in the bottom right in the Files pane:
 
 2. Using the basic R and Quarto syntax (see [intro reference of basic Quarto syntax here](https://quarto.org/docs/get-started/computations/rstudio.html){target="_blank"}), list the packages you need to be loaded in the first chunk/block of code.
 
-3. Use the more chunks/blocks of code to load the data (you may use either **openalex_2024_V1_scholarlymigration_countryflows_enriched.csv** or **scopus_2024_V1_scholarlymigration_countryflows_enriched.csv**) and explore it. You may ignore the code visibility options for now. Just leave default options for code blocks by not addint any options at this point. Use `dplyr` for data manipulation and `ggplot2` for data visualization.
+3. Add more chunks/blocks of code to load the data (you may use either **openalex_2024_V1_scholarlymigration_countryflows_enriched.csv** or **scopus_2024_V1_scholarlymigration_countryflows_enriched.csv**) and explore it. You may ignore the code visibility options for now. Just leave default options for code blocks by not addint any options at this point. Use [`{dplyr}`](https://dplyr.tidyverse.org/) for data manipulation and [`{ggplot2}`](https://ggplot2.tidyverse.org/) for data visualization.
 
 ## 3. Spatial aspect of the migration data
 
@@ -117,6 +119,8 @@ packages <- c(
   )
 install.packages(packages)
 ```
+
+**Note:** You only need to install the pacakges once, do not keep the code to install the packages in your Quarto document, at least not as it is presented above. This code does NOT check if the packages are already installed. So if you keep this code in your Quarto document, the listed packages will be downloaded every time you render the document into `html`, `pdf`, or any other format.
 
 ```{r}
 #| warning: false
@@ -263,7 +267,75 @@ Make sure you respect the indentation (i.e. number of tabs/spaces before `output
 
 Then render your final Quarto document into an `html` file, it should end up in the `docs` folder with the name `index.html`.
 
-## 5. Submit
+## 5. Save changes and push them to GitHub
 
-Post the link to your repository in issues of this repository:
+You can edit and save the files in your repository as much as you want locally. However, to save a certain clean version of your code or document to the git repository and upload it to GitHub, you also need to `commit` these changes. `commit` command "bakes" the changes you made to any files you edited permanently in the repository history. It is like a checkpoint for "undo" and "redo". A brief overview of the `git` workflow is well summarized [here](https://uidaholib.github.io/get-git/3workflow.html), but will also be demoed and discussed in class.
+
+### 5.1. Before the first commit
+
+Before the first commit, you need to execute a few commands in terminal (you can do it either in system terminal or simply in RStudio built-in terminal).
+
+![Opening RStudio terminal](media/images/new-terminal-rstudio.png)
+
+```bash
+git config --global user.name 'Your Name'
+git config --global user.email 'you54385-2@345234543example.com'
+```
+
+![Setting the name and email in RStudio terminal](media/images/set-git-username-email.png)
+
+
+Beware which name and email you set there. The name and email are public in `git` to attribute contributions to specific individuals, to ensure transparency and accountability. The email does not have to be the same email that you used to sign up for GitHub. It can even be a non-existing email. However this email will be publicly available. It will not be visible on the GitHub website, but anyone who clonse a public repository will be able to see it with a `git log` command:
+
+![Beware that your name and email are public (viewed in terminal)](media/images/git-username-email-exposed.png)
+
+![Beware that your name and email are public (viewed in RStudio git history explorer)](media/images/git-username-email-exposed-rstudio.png)
+
+### 5.2. First commit
+
+To save your changes to the local `git` repository that you have open in `RStudio`, find the `Git` panel in the top right and click the `Diff` button.
+
+![Git panel in RStudio](media/images/rstudio-commit-001.png)
+
+This will open a new window where you can preview changes in the files that you made since last commit (which in this case was made by the author of the original repository, since you have just forked it).
+
+![Review changes window in RStudio and commit](media/images/rstudio-commit-002.png)
+
+Here you can select files that had changes or that were newly created or deleted. You can preview changes and select files that you want to save (commit) and later upload to GitHub (via `Push`). You can select one or more files to be `staged`, and only these files will be committed when you click the `Commit` button. Also, add a comment to your commit dsecribing the changes.
+
+
+After clicking the "Commit" button, you will see this screen.
+
+![Changes commited](media/images/rstudio-commit-003.png)
+
+
+Close this window and upload your commited changes to GitHub by clicking the "Push" button.
+
+![Commit window in RStudio](media/images/rstudio-commit-004.png)
+
+You will see the upload screen:
+
+![Git push window in RStudio](media/images/rstudio-commit-005.png)
+
+You can now close this window and the review changes window, and go to your GitHub repository to see the changes.
+
+### 5.3. Publish the html file
+
+Once you have an `index.html` file in the `docs` folder, you can go to the repository settings and publish it to the web.
+
+![Publish via GitHub Pages](media/images/gh-pages-setup.png)
+
+You will need to wait a few minutes. You only have one page, so it should not take too long. Reload the settings page and you should see your web link:
+
+![Website published](media/images/gh-pages-setup-done.png)
+
+You can also go to your repository homepage and add this link in the right side of the repository page:
+
+![Repository view settings](media/images/gh-pages-link.png)
+
+
+
+## 6. Submit
+
+Post the link to your repository and/or website in `Issues` of this repository:
 [https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues](https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues){target="_blank"}
