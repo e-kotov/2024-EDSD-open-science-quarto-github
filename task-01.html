@@ -188,12 +188,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">1. Workshop Task</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learn more</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="https://rstudio-conf-2022.github.io/get-started-quarto/" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">…learn more in advanced Quarto workshop by Posit</span></a>
+ <span class="menu-text">…learn more about Quarto in advanced Quarto workshop by Posit</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://www.ekotov.pro/2024-mpidr-summer-incubator-containers/" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">…learn more about launching your repository in a web browser version of RStudio in ‘Containers for Computational Reproducibility’ workshop</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -225,7 +242,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul></li>
   <li><a href="#create-your-final-document" id="toc-create-your-final-document" class="nav-link" data-scroll-target="#create-your-final-document">4. Create your final document</a></li>
-  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">5. Submit</a></li>
+  <li><a href="#save-changes-and-push-them-to-github" id="toc-save-changes-and-push-them-to-github" class="nav-link" data-scroll-target="#save-changes-and-push-them-to-github">5. Save changes and push them to GitHub</a>
+  <ul class="collapse">
+  <li><a href="#before-the-first-commit" id="toc-before-the-first-commit" class="nav-link" data-scroll-target="#before-the-first-commit">5.1. Before the first commit</a></li>
+  <li><a href="#first-commit" id="toc-first-commit" class="nav-link" data-scroll-target="#first-commit">5.2. First commit</a></li>
+  <li><a href="#publish-the-html-file" id="toc-publish-the-html-file" class="nav-link" data-scroll-target="#publish-the-html-file">5.3. Publish the html file</a></li>
+  </ul></li>
+  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">6. Submit</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -292,6 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="media/images/git-clone-rstudio-003.png" class="img-fluid"></p>
 <p>2.4. If this is your first time using git and GitHub on this computer, you should get a prompt like this:</p>
 <p><img src="media/images/git-clone-rstudio-004.png" class="img-fluid"></p>
+<p><em>You may not get this prompt if the repository you are downloading is public (which in this case when you have created a fork, it is). You will get this prompt when you try to push (upload) any changes you make in the repository back to GitHub.</em></p>
 <p>You should choose the blue button <strong>“Sign in with your browser”</strong>.</p>
 <p>2.5. Complete the authentication in the web browser with your GitHub account:</p>
 <p><img src="media/images/git-clone-rstudio-005.png" class="img-fluid"></p></li>
@@ -315,7 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="media/images/new-quarto-doc-file-pane.png" class="img-fluid"></p>
 <ol start="2" type="1">
 <li><p>Using the basic R and Quarto syntax (see <a href="https://quarto.org/docs/get-started/computations/rstudio.html" target="_blank">intro reference of basic Quarto syntax here</a>), list the packages you need to be loaded in the first chunk/block of code.</p></li>
-<li><p>Use the more chunks/blocks of code to load the data (you may use either <strong>openalex_2024_V1_scholarlymigration_countryflows_enriched.csv</strong> or <strong>scopus_2024_V1_scholarlymigration_countryflows_enriched.csv</strong>) and explore it. You may ignore the code visibility options for now. Just leave default options for code blocks by not addint any options at this point. Use <code>dplyr</code> for data manipulation and <code>ggplot2</code> for data visualization.</p></li>
+<li><p>Add more chunks/blocks of code to load the data (you may use either <strong>openalex_2024_V1_scholarlymigration_countryflows_enriched.csv</strong> or <strong>scopus_2024_V1_scholarlymigration_countryflows_enriched.csv</strong>) and explore it. You may ignore the code visibility options for now. Just leave default options for code blocks by not addint any options at this point. Use <a href="https://dplyr.tidyverse.org/"><code>{dplyr}</code></a> for data manipulation and <a href="https://ggplot2.tidyverse.org/"><code>{ggplot2}</code></a> for data visualization.</p></li>
 </ol>
 </section>
 <section id="spatial-aspect-of-the-migration-data" class="level2">
@@ -341,6 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Note:</strong> You only need to install the pacakges once, do not keep the code to install the packages in your Quarto document, at least not as it is presented above. This code does NOT check if the packages are already installed. So if you keep this code in your Quarto document, the listed packages will be downloaded every time you render the document into <code>html</code>, <code>pdf</code>, or any other format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spData)</span>
@@ -482,9 +507,108 @@ $ name_long &lt;chr&gt; "Fiji", "Tanzania", "Western Sahara", "Canada", "United 
 <p>Make sure you respect the indentation (i.e.&nbsp;number of tabs/spaces before <code>output-dir</code>) of the YAML file.</p>
 <p>Then render your final Quarto document into an <code>html</code> file, it should end up in the <code>docs</code> folder with the name <code>index.html</code>.</p>
 </section>
+<section id="save-changes-and-push-them-to-github" class="level2">
+<h2 class="anchored" data-anchor-id="save-changes-and-push-them-to-github">5. Save changes and push them to GitHub</h2>
+<p>You can edit and save the files in your repository as much as you want locally. However, to save a certain clean version of your code or document to the git repository and upload it to GitHub, you also need to <code>commit</code> these changes. <code>commit</code> command “bakes” the changes you made to any files you edited permanently in the repository history. It is like a checkpoint for “undo” and “redo”. A brief overview of the <code>git</code> workflow is well summarized <a href="https://uidaholib.github.io/get-git/3workflow.html">here</a>, but will also be demoed and discussed in class.</p>
+<section id="before-the-first-commit" class="level3">
+<h3 class="anchored" data-anchor-id="before-the-first-commit">5.1. Before the first commit</h3>
+<p>Before the first commit, you need to execute a few commands in terminal (you can do it either in system terminal or simply in RStudio built-in terminal).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/new-terminal-rstudio.png" class="img-fluid figure-img"></p>
+<figcaption>Opening RStudio terminal</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">'Your Name'</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">'you54385-2@345234543example.com'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/set-git-username-email.png" class="img-fluid figure-img"></p>
+<figcaption>Setting the name and email in RStudio terminal</figcaption>
+</figure>
+</div>
+<p>Beware which name and email you set there. The name and email are public in <code>git</code> to attribute contributions to specific individuals, to ensure transparency and accountability. The email does not have to be the same email that you used to sign up for GitHub. It can even be a non-existing email. However this email will be publicly available. It will not be visible on the GitHub website, but anyone who clonse a public repository will be able to see it with a <code>git log</code> command:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/git-username-email-exposed.png" class="img-fluid figure-img"></p>
+<figcaption>Beware that your name and email are public (viewed in terminal)</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/git-username-email-exposed-rstudio.png" class="img-fluid figure-img"></p>
+<figcaption>Beware that your name and email are public (viewed in RStudio git history explorer)</figcaption>
+</figure>
+</div>
+</section>
+<section id="first-commit" class="level3">
+<h3 class="anchored" data-anchor-id="first-commit">5.2. First commit</h3>
+<p>To save your changes to the local <code>git</code> repository that you have open in <code>RStudio</code>, find the <code>Git</code> panel in the top right and click the <code>Diff</code> button.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/rstudio-commit-001.png" class="img-fluid figure-img"></p>
+<figcaption>Git panel in RStudio</figcaption>
+</figure>
+</div>
+<p>This will open a new window where you can preview changes in the files that you made since last commit (which in this case was made by the author of the original repository, since you have just forked it).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/rstudio-commit-002.png" class="img-fluid figure-img"></p>
+<figcaption>Review changes window in RStudio and commit</figcaption>
+</figure>
+</div>
+<p>Here you can select files that had changes or that were newly created or deleted. You can preview changes and select files that you want to save (commit) and later upload to GitHub (via <code>Push</code>). You can select one or more files to be <code>staged</code>, and only these files will be committed when you click the <code>Commit</code> button. Also, add a comment to your commit dsecribing the changes.</p>
+<p>After clicking the “Commit” button, you will see this screen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/rstudio-commit-003.png" class="img-fluid figure-img"></p>
+<figcaption>Changes commited</figcaption>
+</figure>
+</div>
+<p>Close this window and upload your commited changes to GitHub by clicking the “Push” button.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/rstudio-commit-004.png" class="img-fluid figure-img"></p>
+<figcaption>Commit window in RStudio</figcaption>
+</figure>
+</div>
+<p>You will see the upload screen:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/rstudio-commit-005.png" class="img-fluid figure-img"></p>
+<figcaption>Git push window in RStudio</figcaption>
+</figure>
+</div>
+<p>You can now close this window and the review changes window, and go to your GitHub repository to see the changes.</p>
+</section>
+<section id="publish-the-html-file" class="level3">
+<h3 class="anchored" data-anchor-id="publish-the-html-file">5.3. Publish the html file</h3>
+<p>Once you have an <code>index.html</code> file in the <code>docs</code> folder, you can go to the repository settings and publish it to the web.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/gh-pages-setup.png" class="img-fluid figure-img"></p>
+<figcaption>Publish via GitHub Pages</figcaption>
+</figure>
+</div>
+<p>You will need to wait a few minutes. You only have one page, so it should not take too long. Reload the settings page and you should see your web link:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/gh-pages-setup-done.png" class="img-fluid figure-img"></p>
+<figcaption>Website published</figcaption>
+</figure>
+</div>
+<p>You can also go to your repository homepage and add this link in the right side of the repository page:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/gh-pages-link.png" class="img-fluid figure-img"></p>
+<figcaption>Repository view settings</figcaption>
+</figure>
+</div>
+</section>
+</section>
 <section id="submit" class="level2">
-<h2 class="anchored" data-anchor-id="submit">5. Submit</h2>
-<p>Post the link to your repository in issues of this repository: <a href="https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues" target="_blank">https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues</a></p>
+<h2 class="anchored" data-anchor-id="submit">6. Submit</h2>
+<p>Post the link to your repository and/or website in <code>Issues</code> of this repository: <a href="https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues" target="_blank">https://github.com/e-kotov/2024-EDSD-open-science-quarto-github/issues</a></p>
 
 
 </section>
@@ -741,6 +865,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
