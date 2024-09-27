@@ -50,8 +50,6 @@ format:
     theme:
       light: zephyr
       dark: slate
-    link-external-icon: true
-    link-external-newwindow: true
     css: styles.css
     toc: true
     toc-depth: 4
