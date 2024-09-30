@@ -28,7 +28,7 @@ This website provides supporting materials for the workshop **Open Science and R
 
 ## Expected learning outcomes
 
-- Able to use Quarto to create `html` and `pdf` documents with plain and markdown-formatted text and `R` code.
+- Able to use Quarto to create `html` documents with plain and markdown-formatted text and `R` code.
 
 - Able to upload a project with reproducible analysis to GitHub.
 

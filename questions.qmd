@@ -1,9 +1,0 @@
----
-title: "Questions"
----
-
-During the workshop, if for whatever reason you are hesitating to ask a question outloud, you can use the `Slido` below to ask it anonymously.
-
-```{=html}
-<iframe width='100%' height='80%' src='https://app.sli.do/event/1hXZh7sqRTQNdqnLa2mrQ3' title='Sli.do' style="border:2px solid grey;"></iframe>
-```

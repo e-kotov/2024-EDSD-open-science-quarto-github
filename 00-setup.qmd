@@ -1,5 +1,5 @@
 ---
-title: "0a. Setup"
+title: "0. Setup"
 code-annotations: hover
 ---
 

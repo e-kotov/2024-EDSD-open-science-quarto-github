@@ -29,8 +29,6 @@ website:
     contents:
       - index.qmd
       - 00-setup.qmd
-      - href: questions.qmd
-        text: "0b. Questions during the workshop"
       - task-01.qmd
       - section: "Learn more"
         contents:
