@@ -36,6 +36,8 @@ This website provides supporting materials for the workshop **Open Science and R
 ### Prerequisites
 Students must have basic `R` training, including knowledge of the `tidyverse` for data manipulation and `ggplot2` for data visualization, as well as familiarity with `RStudio` (as provided in the [**EDSD 140 Computer Programming for Demographers**](https://github.com/christiandudel/EDSD2024){target="_blank"} course). To participate in the workshop, we recommend that you have a [GitHub](https://github.com/){target="_blank"} account and have `R`, `RStudio`, and `git` installed. You can follow the setup instructions [here](00-setup.qmd).
 
+This is a new line
+
 
 ### Recommended readings
 1. How to create a GitHub account: [https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)
